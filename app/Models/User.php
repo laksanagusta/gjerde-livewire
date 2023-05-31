@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -58,4 +60,20 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public static function searchUsers($params)
+    {
+        $reansactions = User::when($params['name'], function($query, $name) {
+            return $query->where('name', 'LIKE', "%".$name."%");
+       })->where('role', '!=', 'ADMIN' )
+       ->OrderBy($params['sortColumn'], $params['sortOrder'])
+       ->paginate($params['paginate']);
+
+       return $reansactions;
+    }
+
+    public function transaction(): HasMany 
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Reseller extends Model
 {
@@ -21,8 +23,13 @@ class Reseller extends Model
        return $resellers;
     }
 
-    public function location(): BelongsTo
+    public function location(): HasOne
     {
-        return $this->belongsTo(Location::class);
+        return $this->hasOne(Location::class);
+    }
+
+    public function transaction(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

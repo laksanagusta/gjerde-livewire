@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Services\TransactionService;
 use App\Models\Location;
+use App\Models\Reseller;
 use App\Models\Transaction;
 use App\Models\TransactionType;
 use Illuminate\Contracts\View\View;
@@ -21,9 +22,11 @@ class TransactionController extends Controller
 
     public function create(): View
     {
-        $transactionTypes = TransactionType::find();
+        $resellers = Reseller::all();
+        $transactionTypes = TransactionType::all();
         return view('transactions.create',[
-            'transactionTypes' => $transactionTypes
+            'transactionTypes' => $transactionTypes,
+            'resellers' => $resellers
         ]);
     }
 
@@ -58,8 +61,9 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): View
     {
-           
+        Transaction::destroy($id);
+        return view('transactions.index');
     }
 }

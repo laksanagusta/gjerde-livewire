@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Actions\Fortify\PasswordValidationRules;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class TransactionRequest extends FormRequest
+class UserRequest extends FormRequest
 {
+    use PasswordValidationRules;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -23,8 +25,10 @@ class TransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => 'required|max:255',
-            'grandTotal' => 'required|numeric'
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'password' => $this->passwordRules(),
+            'phoneNumber' => 'required|numeric|digits:12'
         ];
     }
 }

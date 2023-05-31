@@ -39,6 +39,10 @@
                     </a>
                 @endif
 
+                <a href="{{route('register')}}" class="bg-green-500 p-2 ml-4 rounded text-white hover:bg-green-700">
+                    {{ __('Register') }}
+                </a>
+
                 <x-button class="ml-4">
                     {{ __('Log in') }}
                 </x-button>

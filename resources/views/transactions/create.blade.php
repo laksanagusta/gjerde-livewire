@@ -28,30 +28,19 @@
                     @csrf
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
-                            <label for="name" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Name</label>
-                            <input value="{{ old('name') }}" name="name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Transaction Name">
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
-                            <label for="address" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Address</label>
-                            <input value="{{ old('address') }}" name="address" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Transaction Address">
-                        </div>
-                    </div><div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
                             <label for="grandTotal" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Grand Total</label>
-                            <input value="{{ old('grandTotal') }}" name="grandTotal" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" placeholder="Grandtotal">
+                            <input value="{{ old('grandTotal') }}" name="grandTotal" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" placeholder="Grand total">
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
-                            <label for="description" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Deskription</label>
+                            <label for="description" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Deskripsi</label>
                             <input value="{{ old('description') }}" name="description" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Transaction Description">
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
-                            <label for="transactionType" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Transaction Type</label>
+                            <label for="transactionType" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Tipe Transaksi</label>
                             <select name="transaction_type_id" id="transaction_type_id" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                 @foreach($transactionTypes as $transactionType)
                                     <option value="{{ $transactionType->id }}">{{$transactionType->name}}</option>
@@ -60,8 +49,18 @@
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label for="reseller" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Reseller</label>
+                            <select name="reseller_id" id="reseller_id" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                @foreach($resellers as $reseller)
+                                    <option value="{{ $reseller->id }}">{{$reseller->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3 text-right">
-                            <button type="submit" class="bg-gray-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                 Save Transaction
                             </button>
                         </div>

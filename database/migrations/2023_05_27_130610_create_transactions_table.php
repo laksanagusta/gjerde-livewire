@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Location;
+use App\Models\Reseller;
 use App\Models\TransactionType;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(Location::class);
             $table->foreignIdFor(TransactionType::class);
             $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Reseller::class);
             $table->timestamps();
         });
     }

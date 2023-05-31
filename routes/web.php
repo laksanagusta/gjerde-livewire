@@ -5,6 +5,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionTypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::middleware(['auth:sanctum', 'CheckPermission:admin'])->group(function () 
     Route::resource('resellers', ResellerController::class);
     Route::resource('transactions', TransactionController::class);
     Route::resource('transaction-types', TransactionTypeController::class);
+    Route::resource('users', UserController::class);
 });
 
 

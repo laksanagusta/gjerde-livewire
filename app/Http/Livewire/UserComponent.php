@@ -2,22 +2,26 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Transaction;
+use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
-class TransactionComponent extends Component
+class UserComponent extends Component
 {
-    public $sortColumn = "description";
+    use WithPagination;
+    
+    public $sortColumn = "name";
     public $sortOrder = "asc";
     public $sortLink = '<i class="sorticon fa-solid fa-caret-up"></i>';
 
-    public $description = "";
+    public $name = "";
 
     private function headerConfig()
     {
         return [
             'id' => '#',
-            'description' => 'Description',
+            'name' => 'Name',
+            'email' => 'Email',
             'created_at' => [
                 'label' => 'Date Created',
                 'func' => function($value) {
@@ -31,23 +35,28 @@ class TransactionComponent extends Component
          $this->resetPage();
     }
 
-    public function sort($columnName=''){
-          $this->sortOrder = ($this->sortOrder == 'asc') ? 'desc' : 'asc';
+    public function sort($columnName=""){
+         if($this->sortOrder == 'asc'){
+              $this->sortOrder = 'desc';
+         }else{
+              $this->sortOrder = 'asc';
+         } 
+
          $this->sortColumn = $columnName;
     }
 
     public function render(){
          $params = [
-              'description' => $this->description,
+              'name' => $this->name,
               'sortOrder' => $this->sortOrder,
               'sortColumn' => $this->sortColumn,
               'paginate' => 10
          ];
 
-         $transactions = Transaction::searchTransactions($params);
+         $users = User::searchUsers($params);
 
-         return view('livewire.transaction.transaction-component', [
-              'transactions' => $transactions,
+         return view('livewire.user.user-component', [
+              'users' => $users,
               'headers' => $this->headerConfig()
          ]);
     }
