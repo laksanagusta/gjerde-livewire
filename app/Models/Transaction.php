@@ -14,11 +14,28 @@ class Transaction extends Model
 
     public static function searchTransactions($params)
     {
-        $transactions = Transaction::with('reseller')->with('user')->with('location')->when($params['description'], function($query, $description) {
+        $transactions = Transaction::with('reseller')->with('user')->with('location')
+        ->when(isset($params['description']) && !empty($params['description']), function($query, $description) {
             return $query->where('transactions.description', 'LIKE', "%".$description."%");
-       })->OrderBy($params['sortColumn'], $params['sortOrder'])->paginate($params['paginate']);
+        })
+        ->when(isset($params['startTime']) && !empty($params['description']), function($query, $startTime){
+            return $query->where('transactions.created_at', '>=', $startTime);
+        })
+        ->when(isset($params['endTime']) && !empty($params['description']), function($query, $endTime){
+            return $query->where('transactions.created_at', '<=', $endTime);
+        });
 
-       return $transactions;
+        if(isset($params['sortColumn']) && isset($params['sortOrder'])){
+            $transactions->OrderBy($params['sortColumn'], $params['sortOrder']);
+        }
+
+        if(isset($params['paginate'])){
+            $transactions = $transactions->paginate($params['paginate']);
+        }else{
+            $transactions = $transactions->get();
+        }
+
+        return $transactions;
     }
 
     public function reseller(): BelongsTo

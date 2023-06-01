@@ -2,13 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Reseller;
+use App\Models\Product;
 use Livewire\Component;
-use Livewire\WithPagination;
 
-class ResellerComponent extends Component
+class ProductComponent extends Component
 {
-    use WithPagination;
     
     public $sortColumn = "name";
     public $sortOrder = "asc";
@@ -21,14 +19,7 @@ class ResellerComponent extends Component
         return [
             'id' => '#',
             'name' => 'Name',
-            'address' => 'Address',
-            'phoneNumber' => 'Phone Number',
-            'location' => [
-                'label' => 'Location',
-                'func' => function($value) {
-                    return $value->name;
-                }
-            ],
+            'unit_price' => 'Price',
             'created_at' => [
                 'label' => 'Date Created',
                 'func' => function($value) {
@@ -60,10 +51,10 @@ class ResellerComponent extends Component
               'paginate' => 10
          ];
 
-         $resellers = Reseller::searchResellers($params);
+         $products = Product::searchProducts($params);
 
-         return view('livewire.reseller.reseller-component', [
-              'resellers' => $resellers,
+         return view('livewire.product.product-component', [
+              'products' => $products,
               'headers' => $this->headerConfig()
          ]);
     }

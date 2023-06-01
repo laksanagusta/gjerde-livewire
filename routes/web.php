@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\ApiTransactionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionTypeController;
@@ -35,7 +37,10 @@ Route::middleware(['auth:sanctum', 'CheckPermission:admin'])->group(function () 
     Route::resource('transactions', TransactionController::class);
     Route::resource('transaction-types', TransactionTypeController::class);
     Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class);
 });
+
+Route::post('dashboard/filter-report', [ApiTransactionController::class, 'fetchReport']);
 
 
 

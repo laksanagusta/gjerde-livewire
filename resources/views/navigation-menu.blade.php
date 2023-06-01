@@ -39,6 +39,9 @@
                                     <x-dropdown-link href="{{ route('locations.index') }}">
                                         {{ __('Location') }}
                                     </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('products.index') }}">
+                                        {{ __('Product') }}
+                                    </x-dropdown-link>
 
                                     <x-dropdown-link href="{{ route('resellers.index') }}">
                                         {{ __('Reseller') }}
@@ -59,7 +62,6 @@
                     <x-nav-link href="{{ route('transactions.index') }}" :active="request()->routeIs('transactions.index')">
                         {{ __('Transaction') }}
                     </x-nav-link>
-
                 </div>
             </div>
 

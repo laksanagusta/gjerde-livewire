@@ -4,9 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\Transaction;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class TransactionComponent extends Component
 {
+    use WithPagination;
+
     public $sortColumn = "description";
     public $sortOrder = "asc";
     public $sortLink = '<i class="sorticon fa-solid fa-caret-up"></i>';
