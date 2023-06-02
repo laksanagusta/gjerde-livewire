@@ -37,7 +37,13 @@
                                 <td class="border px-6 py-4">
                                     <a href={{route('locations.show', $item->id)}} class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 mx-1 rounded">Detail</a>
                                     <a href={{route('locations.edit', $item->id)}} class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 mx-1 rounded">Edit</a>
-                                    <a href={{route('locations.destroy', $item->id)}} class="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 rounded">Delete</a>
+                                    <div class="inline-block">
+                                        <form action="{{route('locations.destroy', $item->id)}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="delete"/>
+                                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 rounded">Delete</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

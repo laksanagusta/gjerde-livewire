@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Services\TransactionService;
 use App\Models\Location;
+use App\Models\Product;
 use App\Models\Reseller;
 use App\Models\Transaction;
 use App\Models\TransactionType;
@@ -24,9 +25,11 @@ class TransactionController extends Controller
     {
         $resellers = Reseller::all();
         $transactionTypes = TransactionType::all();
+        $products = Product::all();
         return view('transactions.create',[
             'transactionTypes' => $transactionTypes,
-            'resellers' => $resellers
+            'resellers' => $resellers,
+            'products' => $products
         ]);
     }
 

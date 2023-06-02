@@ -52,6 +52,9 @@ class LocationController extends Controller
 
     public function destroy(string $id)
     {
-           
+        Location::destroy($id);
+        return view('locations.index', [
+            'locations' => Location::paginate(10)
+        ]);
     }
 }
